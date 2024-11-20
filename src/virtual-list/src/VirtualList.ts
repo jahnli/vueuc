@@ -356,8 +356,12 @@ export default defineComponent({
             }
           }
           e.preventDefault()
-          listEl.scrollTop += e.deltaY / ensureWheelScale()
-          listEl.scrollLeft += e.deltaX / ensureWheelScale()
+          if (!e.shiftKey) {
+            listEl.scrollTop += e.deltaY / ensureWheelScale();
+            listEl.scrollLeft += e.deltaX / ensureWheelScale();
+          } else {
+            listEl.scrollLeft += e.deltaY / ensureWheelScale();
+          }
           syncViewport()
           wheelCatched = true
           beforeNextFrameOnce(() => {
